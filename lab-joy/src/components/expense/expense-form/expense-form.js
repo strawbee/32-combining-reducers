@@ -1,17 +1,18 @@
 import React from 'react';
 
-class CategoryForm extends React.Component {
+class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.categories ? 
-      this.props.categories :
-      { 
+    this.state = this.props.expenses ?
+      this.props.expenses :
+      {
         name: '',
-        budget: 0,
+        expense: 0,
         editing: false,
+        categoryId: this.props.categoryId,
       };
 
-    let memberFunctions = Object.getOwnPropertyNames(CategoryForm.prototype);
+    let memberFunctions = Object.getOwnPropertyNames(ExpenseForm.prototype);
     for (let functionName of memberFunctions) {
       if (functionName.startsWith('handle')) {
         this[functionName] = this[functionName].bind(this);
@@ -20,32 +21,34 @@ class CategoryForm extends React.Component {
   }
 
   handleChange(e) {
-    this.setState ({[e.target.name]: e.target.value});
+    this.setState({[e.target.name]: e.target.value});
   }
-
+  
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete(this.state);
 
     this.setState({
       name: '',
-      budget: 0,
+      expense: 0,
       editing: false,
+      categoryId: this.props.categoryId,
     });
   }
 
   render() {
-    console.log('category-form props: ', this.props);
+    console.log('expense-form props: ', this.props);
+
     return (
-      <form className="category-form" onSubmit={this.handleSubmit}>
+      <form className="expense-form" onSubmit={this.handleSubmit}>
         <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
 
-        <input type="number" name="budget" value={this.state.budget} onChange={this.handleChange} />
+        <input type="number" name="expense" value={this.state.expenses} onChange={this.handleChange} />
 
         <button type="submit">{this.props.buttonText}</button>
-      </form>    
+      </form>
     );
   }
 }
 
-export default CategoryForm;
+export default ExpenseForm;

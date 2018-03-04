@@ -27,6 +27,10 @@ class ExpenseItem extends React.Component {
     }
   }
 
+  handleEditing(exp) {
+    this.setState({ editing: !this.state.editing });
+  }
+
   handleUpdate(exp) {
     this.setState({
       editing: !this.state.editing,
@@ -41,15 +45,13 @@ class ExpenseItem extends React.Component {
   }
 
   render() {
-    console.log('expense-item props: ', this.props);
-
     return (
-      <div className="expense-item" key={this.props.expenses._id} onDoubleClick={this.handleUpdate}>
+      <div className="expense-item" key={this.props.expenses._id} onDoubleClick={this.handleEditing}>
         <h2>{this.props.expenses.name}</h2>
         <p>Expense: ${this.props.expenses.expense}</p>
         <button onClick={this.handleDelete}>{this.props.buttonText}</button>
 
-        {renderIf(this.state.editing, <ExpenseForm expenses={this.props.expenses} buttonText="update" onComplete={this.handleUpdate} />)}
+        {renderIf(this.state.editing, <ExpenseForm expenses={this.props.expenses} buttonText="update expense" onComplete={this.handleUpdate} />)}
       </div>
     );
   }

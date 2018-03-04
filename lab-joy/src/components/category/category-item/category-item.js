@@ -41,15 +41,13 @@ class CategoryItem extends React.Component {
   }
 
   render() {
-    console.log('category-item props: ', this.props);
-
     return (
       <div className="category-item" key={this.props.category._id} onDoubleClick={this.handleUpdate}>
         <h2>{this.props.category.name}</h2>
-        <p>Budget: ${this.props.category.budget}</p>
+        <p>Budget: ${this.props.category.budget - this.props.expenses[this.props.category._id].reduce((a, b) => a + Number(b.expense), 0)}</p>
         <button onClick={this.handleDelete}>{this.props.buttonText}</button>
 
-        {renderIf(this.state.editing, <CategoryForm category={this.props.category} buttonText="update" onComplete={this.handleUpdate} />)}
+        {renderIf(this.state.editing, <CategoryForm categories={this.props.category} buttonText="update" onComplete={this.handleUpdate} />)}
 
         <ExpenseForm categoryId={this.props.category._id} buttonText="create expense" onComplete={this.props.expenseItemExpenseCreate} />
 
@@ -65,8 +63,7 @@ class CategoryItem extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state,
-  expense: state.expenses,
+  expenses: state.expenses,
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({

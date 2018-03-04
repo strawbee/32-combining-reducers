@@ -1,7 +1,7 @@
 import * as actions from '../actions/category-actions';
 require('jest');
 
-describe('category actions', () => {
+describe('Category Actions', () => {
   it('should create an action to add a category', () => {
     let category = { name: 'hello world' };
     let action = actions.categoryCreate(category);

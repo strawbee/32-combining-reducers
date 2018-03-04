@@ -37,13 +37,11 @@ class ExpenseForm extends React.Component {
   }
 
   render() {
-    console.log('expense-form props: ', this.props);
-
     return (
       <form className="expense-form" onSubmit={this.handleSubmit}>
         <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
 
-        <input type="number" name="expense" value={this.state.expenses} onChange={this.handleChange} />
+        <input type="number" name="expense" value={this.state.expense} onChange={this.handleChange} />
 
         <button type="submit">{this.props.buttonText}</button>
       </form>

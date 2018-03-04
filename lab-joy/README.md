@@ -2,7 +2,7 @@
 Joy Hou, Feb 26, 2018
 
 ## Problem Domain
-We are using React and Redux to create a budget tracker application where we can create, update, and delete budget items.
+We are using React and Redux to create a budget tracker application where we can create, update, and delete budget items. Within each budget item, we can also create, update, and delete expenses related to the item category. We are using Redux's combineReducers method to combine reducers for our categories and our expenses.
 
 ## Components
 ### src/components/app/index.js
@@ -16,3 +16,9 @@ The CategoryForm component handles change and submit of the form to create a new
 
 ### src/components/category/category-item/category-item.js
 The CategoryItem component handles editing and deletion of each category item, and uses react-redux's connect to map state and dispatchable methods to props. Each item displays the category's name and budget amount as well as a delete button. When the category item is double clicked, a CategoryForm is displayed to update the item onComplete.
+
+### src/components/expense/expense-form/expense-form.js
+The ExpenseForm component allows us to create expenses. It has an onComplete prop that is invoked with the form state onSubmit and supports an expense prop that sets both the initial form state and updates the state. 
+
+### src/components/expense/expense-item/expense-item.js
+The ExpenseItem component displays the name and price of each expense. It has a button that allows the use to delete the expense, and also displays an ExpenseForm that enables the user to update the expense in the app state.
